@@ -10,6 +10,8 @@
 
 **Language：** [繁體中文](README.md) ・ [English](README.en.md) ・ [日本語](README.ja.md) ・ [한국어](README.ko.md)
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-d4af37.svg)](LICENSE)
+
 </div>
 
 ---
