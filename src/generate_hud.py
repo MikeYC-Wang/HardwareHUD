@@ -386,6 +386,11 @@ def build_language_rings_svg(langs, cx: float, cy: float, r_base: float) -> str:
     row_h = 18
     legend_y0 = -((len(langs) - 1) * row_h) / 2
 
+    parts.append(
+        f'<text x="{legend_x + 8:.1f}" y="{legend_y0 - 14:.1f}" font-family="Consolas, \'Courier New\', monospace" '
+        f'font-size="7.5" fill="{COLOR_AMBER}" letter-spacing="1.5">TOP {len(langs)} LANGUAGES</text>'
+    )
+
     for i, lang in enumerate(langs):
         r = r_base - i * ring_gap
         circumference = 2 * math.pi * r
