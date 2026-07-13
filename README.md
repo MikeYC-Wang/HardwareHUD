@@ -73,6 +73,10 @@ python src/generate_hud.py
 
 本專案採用 MIT 授權，詳見 [LICENSE](LICENSE)。
 
+## 致謝
+
+感謝所有協助測試與回饋的夥伴。
+
 ---
 
 <div align="center">
