@@ -2,23 +2,19 @@
 
 # ⚡ HardwareHUD
 
-### 全端架構師的黑金晶片控制台　·　Black-Gold Chip Console for Full-Stack Architects
+### 全端架構師的黑金晶片控制台
 
 一個完全手工繪製 SVG、零第三方繪圖庫的 GitHub Profile 動態數據面板
-A hand-drawn, zero-charting-library SVG dashboard for your GitHub profile README
 
 <img src="profile-hud.svg" width="800" alt="HardwareHUD preview" />
 
-**語言 / Language：** [繁體中文](#繁體中文) ・ [English](#english) ・ [日本語](#日本語) ・ [한국어](#한국어)
+**Language：** [繁體中文](README.md) ・ [English](README.en.md) ・ [日本語](README.ja.md) ・ [한국어](README.ko.md)
 
 </div>
 
 ---
 
-<a id="繁體中文"></a>
-## 🇹🇼 繁體中文
-
-### 專案簡介
+## 專案簡介
 
 **HardwareHUD** 會透過 GitHub GraphQL API v4 撈取你過去一年的 Contribution 日曆與前五大程式語言佔比，
 並純手工用 Python 字串拼接原生 SVG 標籤（`<polygon>`、`<circle>`、`<path>`、`<text>`），
@@ -33,13 +29,13 @@ A hand-drawn, zero-charting-library SVG dashboard for your GitHub profile README
 | 📡 聲納雷達掃描儀 | 將 Commit / Issue / PR / Repo / Review 五大維度重新包裝成帶十字瞄準線的科幻五角雷達圖 |
 | 💍 同心環形能源條 | 前五大程式語言佔比，改用類似跑車儀表板的多層同心圓弧條呈現 |
 
-### 預覽
+## 預覽
 
 <img src="profile-hud.svg" width="800" alt="preview" />
 
 > 上圖為 `profile-hud.svg`，由 GitHub Actions 每日自動更新。第一次執行前該檔案不存在，需先手動觸發一次 workflow。
 
-### 使用方式
+## 使用方式
 
 1. **Fork 或直接使用本專案**，讓 `main` 分支包含 [`src/generate_hud.py`](src/generate_hud.py) 與 [`.github/workflows/hud-updater.yml`](.github/workflows/hud-updater.yml)。
 2. **建立 Personal Access Token (PAT)**：前往 GitHub → Settings → Developer settings → Personal access tokens，建立一組具備 `read:user` 權限的 Token（Classic 或 Fine-grained 皆可，只需能讀取你自己的 contributions 與 repositories）。
@@ -52,7 +48,7 @@ A hand-drawn, zero-charting-library SVG dashboard for your GitHub profile README
    ![Hardware HUD](https://raw.githubusercontent.com/<你的帳號>/HardwareHUD/main/profile-hud.svg)
    ```
 
-### 本地測試
+## 本地測試
 
 ```bash
 pip install -r src/requirements.txt
@@ -62,197 +58,10 @@ python src/generate_hud.py
 
 執行完成後會在目前目錄下產生 `profile-hud.svg`。
 
-### 客製化
+## 客製化
 
 - 顏色、尺寸等常數集中在 [`src/generate_hud.py`](src/generate_hud.py) 檔案最上方（`COLOR_*`、`WIDTH`、`HEIGHT`），可依喜好調整。
 - 自動更新時間可修改 [`hud-updater.yml`](.github/workflows/hud-updater.yml) 中的 `cron` 排程。
-
----
-
-<a id="english"></a>
-## 🇺🇸 English
-
-### Overview
-
-**HardwareHUD** fetches your last year of GitHub contribution calendar data and top-5 language
-usage via the GraphQL API v4, then hand-assembles a native SVG string (`<polygon>`, `<circle>`,
-`<path>`, `<text>` — no charting libraries at all) into a dark-mode-friendly
-(`#0d1117` / `#050508`) "precision hardware console" with gold/amber (`#d4af37`, `#ffb703`) neon
-accents. It's regenerated automatically every day by GitHub Actions.
-
-The console has three signature instruments:
-
-| Component | Description |
-| --- | --- |
-| 🧊 Isometric 3D chip matrix | 52 weeks × 7 days of contributions rendered as glowing extruded cubes using isometric projection — the more commits, the taller and more amber the block |
-| 📡 Sonar radar scanner | Commit / Issue / PR / Repo / Review reimagined as a 5-axis sci-fi radar with crosshairs |
-| 💍 Concentric energy rings | Top-5 languages shown as multi-layer arc gauges, similar to a sports car's digital dashboard |
-
-### Preview
-
-<img src="profile-hud.svg" width="800" alt="preview" />
-
-> The image above is `profile-hud.svg`, refreshed daily by GitHub Actions. It won't exist until
-> you trigger the workflow for the first time.
-
-### How to Use
-
-1. **Fork (or use) this repo** so `main` contains [`src/generate_hud.py`](src/generate_hud.py) and [`.github/workflows/hud-updater.yml`](.github/workflows/hud-updater.yml).
-2. **Create a Personal Access Token (PAT)** under GitHub → Settings → Developer settings →
-   Personal access tokens, with `read:user` scope (enough to read your own contributions and
-   repositories).
-3. **Add it as a repository secret**: Settings → Secrets and variables → Actions → New repository
-   secret, name it `GH_PAT`.
-4. **Set your username**: edit `HUD_USERNAME: MikeYC-Wang` in
-   [`.github/workflows/hud-updater.yml`](.github/workflows/hud-updater.yml) to your own GitHub handle.
-5. **Trigger the first run** manually from the Actions tab → `Hardware HUD Updater` →
-   `Run workflow`. Afterwards it runs daily at 16:00 UTC and auto-commits `profile-hud.svg`.
-6. **Embed it in your profile README** (the special `<username>/<username>` repo):
-
-   ```markdown
-   ![Hardware HUD](https://raw.githubusercontent.com/<your-username>/HardwareHUD/main/profile-hud.svg)
-   ```
-
-### Local Testing
-
-```bash
-pip install -r src/requirements.txt
-export GH_PAT=your_personal_access_token   # PowerShell: $env:GH_PAT="..."
-python src/generate_hud.py
-```
-
-This writes `profile-hud.svg` to the current directory.
-
-### Customization
-
-- Colors and canvas size live as constants at the top of [`src/generate_hud.py`](src/generate_hud.py) (`COLOR_*`, `WIDTH`, `HEIGHT`).
-- Change the update schedule via the `cron` expression in [`hud-updater.yml`](.github/workflows/hud-updater.yml).
-
----
-
-<a id="日本語"></a>
-## 🇯🇵 日本語
-
-### プロジェクト概要
-
-**HardwareHUD** は GitHub GraphQL API v4 を使って過去1年分のコントリビューションカレンダーと
-使用言語トップ5を取得し、サードパーティのグラフ描画ライブラリを一切使わず、
-Python の文字列だけでネイティブな SVG タグ（`<polygon>`、`<circle>`、`<path>`、`<text>`）を
-組み立て、ダークモード（`#0d1117` / `#050508`）とゴールド／アンバーのネオン
-（`#d4af37`、`#ffb703`）を纏った「精密ハードウェアコンソール」を生成します。
-GitHub Actions が毎日自動で再生成します。
-
-コンソールは3つの主要インストゥルメントで構成されています。
-
-| コンポーネント | 説明 |
-| --- | --- |
-| 🧊 アイソメトリック3Dチップマトリクス | 52週×7日分のコントリビューションを等角投影で立体的なキューブとして描画。コミットが多いほど高く、より輝くアンバー色になります |
-| 📡 ソナー・レーダースキャナー | Commit / Issue / PR / Repo / Review の5軸をクロスヘア付きのSF風レーダーとして再構築 |
-| 💍 同心円エネルギーリング | 使用言語トップ5をスポーツカーのデジタルダッシュボードのような多層円弧ゲージで表示 |
-
-### プレビュー
-
-<img src="profile-hud.svg" width="800" alt="preview" />
-
-> 上の画像は `profile-hud.svg` で、GitHub Actions によって毎日更新されます。初回は
-> ワークフローを手動実行するまで生成されません。
-
-### 使い方
-
-1. **このリポジトリを Fork（またはそのまま使用）**し、`main` ブランチに
-   [`src/generate_hud.py`](src/generate_hud.py) と [`.github/workflows/hud-updater.yml`](.github/workflows/hud-updater.yml) が含まれていることを確認してください。
-2. **Personal Access Token (PAT) を作成**：GitHub → Settings → Developer settings →
-   Personal access tokens で、`read:user` スコープを持つトークンを作成します（自分自身の
-   contributions とリポジトリを読み取れれば十分です）。
-3. **リポジトリシークレットに追加**：Settings → Secrets and variables → Actions →
-   New repository secret から、名前を `GH_PAT` として登録します。
-4. **ユーザー名を設定**：[`.github/workflows/hud-updater.yml`](.github/workflows/hud-updater.yml) 内の
-   `HUD_USERNAME: MikeYC-Wang` を自分の GitHub ユーザー名に書き換えます。
-5. **初回を手動実行**：Actions タブから `Hardware HUD Updater` → `Run workflow` を実行すると、
-   リポジトリ直下に `profile-hud.svg` が生成されます。以降は毎日 UTC 16:00 に自動実行・自動コミットされます。
-6. **プロフィール README に埋め込む**（特別な `<username>/<username>` リポジトリ内）：
-
-   ```markdown
-   ![Hardware HUD](https://raw.githubusercontent.com/<あなたのユーザー名>/HardwareHUD/main/profile-hud.svg)
-   ```
-
-### ローカルテスト
-
-```bash
-pip install -r src/requirements.txt
-export GH_PAT=あなたのPersonalAccessToken   # PowerShell: $env:GH_PAT="..."
-python src/generate_hud.py
-```
-
-実行すると、カレントディレクトリに `profile-hud.svg` が出力されます。
-
-### カスタマイズ
-
-- 色やキャンバスサイズは [`src/generate_hud.py`](src/generate_hud.py) 冒頭の定数（`COLOR_*`、`WIDTH`、`HEIGHT`）で調整できます。
-- 更新スケジュールは [`hud-updater.yml`](.github/workflows/hud-updater.yml) の `cron` 式で変更できます。
-
----
-
-<a id="한국어"></a>
-## 🇰🇷 한국어
-
-### 프로젝트 소개
-
-**HardwareHUD**는 GitHub GraphQL API v4를 통해 지난 1년간의 컨트리뷰션 캘린더와
-상위 5개 프로그래밍 언어 사용 비율을 가져온 뒤, 서드파티 차트 라이브러리 없이
-순수 Python 문자열 포매팅만으로 네이티브 SVG 태그(`<polygon>`, `<circle>`, `<path>`, `<text>`)를
-조립하여, 다크 모드(`#0d1117` / `#050508`)와 골드/앰버 네온(`#d4af37`, `#ffb703`) 감성의
-"정밀 하드웨어 콘솔"을 만듭니다. GitHub Actions가 매일 자동으로 다시 생성합니다.
-
-콘솔은 세 가지 핵심 계기판으로 구성됩니다.
-
-| 구성 요소 | 설명 |
-| --- | --- |
-| 🧊 아이소메트릭 3D 칩 매트릭스 | 52주 × 7일치 컨트리뷰션을 등각 투영(Isometric Projection)으로 입체 큐브로 표현. 커밋이 많을수록 블록이 높아지고 앰버 골드빛이 강해집니다 |
-| 📡 소나 레이더 스캐너 | Commit / Issue / PR / Repo / Review 다섯 가지 지표를 십자선이 있는 SF풍 레이더로 재구성 |
-| 💍 동심원 에너지 링 | 상위 5개 언어 비율을 스포츠카 디지털 계기판 같은 다층 원호 게이지로 표시 |
-
-### 미리보기
-
-<img src="profile-hud.svg" width="800" alt="preview" />
-
-> 위 이미지는 `profile-hud.svg`이며, GitHub Actions가 매일 갱신합니다. 워크플로를 처음 한 번
-> 수동으로 실행하기 전까지는 파일이 존재하지 않습니다.
-
-### 사용 방법
-
-1. **이 저장소를 Fork(또는 그대로 사용)**하여 `main` 브랜치에
-   [`src/generate_hud.py`](src/generate_hud.py)와 [`.github/workflows/hud-updater.yml`](.github/workflows/hud-updater.yml)이 포함되어 있는지 확인합니다.
-2. **Personal Access Token(PAT) 생성**: GitHub → Settings → Developer settings →
-   Personal access tokens에서 `read:user` 권한을 가진 토큰을 생성합니다(자신의 컨트리뷰션과
-   저장소를 읽을 수 있으면 충분합니다).
-3. **저장소 시크릿으로 추가**: Settings → Secrets and variables → Actions →
-   New repository secret에서 이름을 `GH_PAT`로 등록합니다.
-4. **사용자 이름 설정**: [`.github/workflows/hud-updater.yml`](.github/workflows/hud-updater.yml) 파일의
-   `HUD_USERNAME: MikeYC-Wang`을 본인의 GitHub 아이디로 변경합니다.
-5. **첫 실행을 수동으로 트리거**: Actions 탭에서 `Hardware HUD Updater` → `Run workflow`를
-   실행하면 저장소 루트에 `profile-hud.svg`가 생성됩니다. 이후에는 매일 UTC 16:00에 자동 실행
-   및 자동 커밋됩니다.
-6. **프로필 README에 삽입**(특수 `<username>/<username>` 저장소):
-
-   ```markdown
-   ![Hardware HUD](https://raw.githubusercontent.com/<사용자명>/HardwareHUD/main/profile-hud.svg)
-   ```
-
-### 로컬 테스트
-
-```bash
-pip install -r src/requirements.txt
-export GH_PAT=본인의PersonalAccessToken   # PowerShell: $env:GH_PAT="..."
-python src/generate_hud.py
-```
-
-실행하면 현재 디렉터리에 `profile-hud.svg`가 생성됩니다.
-
-### 커스터마이징
-
-- 색상과 캔버스 크기는 [`src/generate_hud.py`](src/generate_hud.py) 상단의 상수(`COLOR_*`, `WIDTH`, `HEIGHT`)에서 조정할 수 있습니다.
-- 갱신 주기는 [`hud-updater.yml`](.github/workflows/hud-updater.yml)의 `cron` 표현식을 수정하여 변경할 수 있습니다.
 
 ---
 
