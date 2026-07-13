@@ -1,0 +1,52 @@
+name: Hardware HUD Updater
+
+# Runs daily at 16:00 UTC == 00:00 Asia/Taipei (UTC+8)
+on:
+  schedule:
+    - cron: "0 16 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hardware-hud-updater
+  cancel-in-progress: true
+
+jobs:
+  update-hud:
+    name: Regenerate profile-hud.svg
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate Hardware HUD SVG
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          HUD_USERNAME: MikeYC-Wang
+        run: python generate_hud.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "MikeYC-Wang"
+          git config user.email "asd384639@gmail.com"
+          git add profile-hud.svg
+          if git diff --staged --quiet; then
+            echo "No changes detected in profile-hud.svg, skipping commit."
+          else
+            git commit -m "chore: refresh hardware hud [skip ci]"
+            git push origin HEAD:main
+          fi
