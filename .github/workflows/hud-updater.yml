@@ -31,13 +31,13 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r src/requirements.txt
 
       - name: Generate Hardware HUD SVG
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
           HUD_USERNAME: MikeYC-Wang
-        run: python generate_hud.py
+        run: python src/generate_hud.py
 
       - name: Commit and push changes
         run: |
