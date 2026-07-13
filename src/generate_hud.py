@@ -23,7 +23,7 @@ from __future__ import annotations
 import math
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 import requests
 
@@ -492,7 +492,8 @@ def build_frame_svg(total_contributions: int, username: str) -> str:
         f'<text x="40" y="{HEIGHT - 12}" font-family="Consolas, \'Courier New\', monospace" font-size="9" '
         f'fill="{COLOR_TEXT_GOLD}" letter-spacing="1">SYSTEM STATUS: ACTIVE</text>'
     )
-    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    tz_utc8 = timezone(timedelta(hours=8))
+    now_str = datetime.now(tz_utc8).strftime("%Y-%m-%d %H:%M UTC+8")
     parts.append(
         f'<text x="{WIDTH / 2:.0f}" y="{HEIGHT - 12}" text-anchor="middle" '
         f'font-family="Consolas, \'Courier New\', monospace" font-size="8" '
