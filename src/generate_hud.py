@@ -383,7 +383,8 @@ def build_language_rings_svg(langs, cx: float, cy: float, r_base: float) -> str:
     ring_gap = 8.5
     stroke_w = 5.5
     legend_x = r_base + 26
-    legend_y0 = -((len(langs) - 1) * 15) / 2
+    row_h = 18
+    legend_y0 = -((len(langs) - 1) * row_h) / 2
 
     for i, lang in enumerate(langs):
         r = r_base - i * ring_gap
@@ -406,15 +407,12 @@ def build_language_rings_svg(langs, cx: float, cy: float, r_base: float) -> str:
             f'transform="rotate(-90)" filter="url(#goldGlow)"/>'
         )
 
-        ly = legend_y0 + i * 15
+        ly = legend_y0 + i * row_h
         parts.append(f'<circle cx="{legend_x:.1f}" cy="{ly - 3:.1f}" r="3" fill="{color}"/>')
         parts.append(
             f'<text x="{legend_x + 8:.1f}" y="{ly:.1f}" font-family="Consolas, \'Courier New\', monospace" '
-            f'font-size="9" fill="{COLOR_TEXT_GOLD}">{lang["name"]}</text>'
-        )
-        parts.append(
-            f'<text x="{legend_x + 8:.1f}" y="{ly + 10:.1f}" font-family="Consolas, \'Courier New\', monospace" '
-            f'font-size="7.5" fill="{COLOR_TEXT_MUTED}">{lang["pct"]:.1f}%</text>'
+            f'font-size="8.5" fill="{COLOR_TEXT_GOLD}">'
+            f'{lang["name"]} <tspan fill="{COLOR_TEXT_MUTED}" font-size="7.5">{lang["pct"]:.1f}%</tspan></text>'
         )
 
     parts.append(
