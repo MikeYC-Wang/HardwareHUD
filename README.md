@@ -65,6 +65,10 @@ python src/generate_hud.py
 - 顏色、尺寸等常數集中在 [`src/generate_hud.py`](src/generate_hud.py) 檔案最上方（`COLOR_*`、`WIDTH`、`HEIGHT`），可依喜好調整。
 - 自動更新時間可修改 [`hud-updater.yml`](.github/workflows/hud-updater.yml) 中的 `cron` 排程。
 
+## 貢獻
+
+歡迎透過 Issue 或 Pull Request 提出建議與改進！
+
 ---
 
 <div align="center">
